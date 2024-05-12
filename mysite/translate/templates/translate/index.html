@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Translate</title>
+</head>
+<body>
+<h1>Rawley's Text Translator</h1>
+<h6>Which in no way depends on google translate. Wink wink nudge nudge</h6>
+<form action="{% url 'translate:translate' %}">
+<label for="input_text">Enter text to translate:</label><br>
+  <textarea name="input_text" id="input_text" cols="80" rows="10">{{ input_text }}</textarea>
+<br>
+  <label for="dest_lang">Destination language:</label><br>
+  <select name="dest_lang" id="dest_lang">
+    {{ lang_list }}
+    {% for lang, code in lang_list.items %}
+    <option value="{{ code }}" {% if code == dest_lang %}selected{% endif %}>{{ lang.title }}</option>
+    {% endfor %}  
+  
+</select><br><br>
+<input type="submit" value="Translate">
+</form>
+{% if translation %}
+<h2>Translated text:</h2>
+<h3>{{ translation }}</h3>
+<br>
+{% endif %}
+
+<br>
+<form action="{% url 'translate:clear' %}" method="get">
+  <input type="submit" value="Clear">
+</form>
+</body>
+</html>
