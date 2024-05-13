@@ -20,11 +20,14 @@ class IndexView(generic.TemplateView):
 def send(request):
   #Config
   port = 587
-  smtp_server = 'smtp-relay.brevo.com'
-  login = os.getenv('MAIL_USER')
-  password = os.getenv('MAIL_PASS')
+  #smtp_server = 'smtp-relay.brevo.com'
+  smtp_server = 'smtp.gmail.com'
+  #login = os.getenv('MAIL_USER')
+  #password = os.getenv('MAIL_PASS')
+  login = os.getenv('GOOG_USER')
+  password = os.getenv('GOOG_APP_PASS')
   sender_email = 'no-reply@drrawley.com'
-  receiver_email = login
+  receiver_email = os.getenv('GOOG_DESTINATION')
 
   #Get contact info from the form
   contact = {}
